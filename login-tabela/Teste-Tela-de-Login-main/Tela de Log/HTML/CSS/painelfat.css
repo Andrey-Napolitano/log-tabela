@@ -1,0 +1,331 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial;
+    height: auto;
+    color: #fff;
+  }
+  
+  body {
+    text-transform: uppercase;
+    font-weight: bold !important;
+    font-size: 12px;
+    background-color: #212529;
+    color:#fff;
+    display: flex;
+    height: 590px;
+  }
+  
+  .header-container {
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    background-color: #212529;
+    color: #ffffff
+  }
+  
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
+  
+  .button1,
+  .button2 {
+    width: 24Vh;
+    height: 4vh;
+    color: white;
+    font-size: 12px;
+    border-radius: 0.4rem;
+    margin: 7px 4px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold !important;
+  }
+  
+  .button1 {
+    background: rgb(0, 67, 190);
+  }
+  
+  .button2 { 
+    background: rgb(0, 67, 190); 
+  }
+  
+  .search-container {
+    margin-top: 20px;
+  }
+  
+  .searchbar input { 
+    padding: 10px 20px;
+    justify-content: flex-end;
+    border-radius: 0.5rem;
+    border: 2px solid #295f96;
+    transition: all 0.3s ease;
+    outline: none;
+    width: 40vh;
+    height: 2vh;
+  }
+  
+  .searchbar:focus {
+    border-color: #0b7dda;
+  }
+   
+  .search-button {
+    width: 6vh;
+    height: 4vh;
+    background: rgb(0, 67, 190);
+    cursor: pointer;
+    border-radius: 0.4rem;
+  }
+  
+  .search-button:hover {
+    background: #0b7dda;
+  }
+  
+  .btn-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .table-responsive {
+    border-radius: 0.4rem;
+    scroll-snap-type: y mandatory;
+    scroll-padding: 2rem;
+  }
+  
+  .table-responsive td {
+    border: 5px;
+  }
+  
+  .table-container thead th:not(:first-child) {
+    border-top: none; 
+  }
+  
+  .table-container thead th:first-child {
+    border-top: none;
+  }
+  
+  .table-container tbody tr:not(:last-child) {
+    border-bottom: 1px solid #494040; 
+  }
+  
+  .table {
+    border-collapse: collapse;
+  }
+  
+  .slidecontainer {
+    flex-direction: column;
+    margin-top: 10px;
+    width:60%;
+    margin-bottom: 20px;
+    margin-left: 280px;
+  }
+  
+  .slidecontainer label {
+    color: #fff;
+    font-size: 12px;
+    padding-left: 10%;
+  }
+  
+  .slidecontainer .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.4rem;
+    width: 30vh;
+    height: 11px;
+    border-radius: 3px; 
+    margin-top: 4px;
+    margin-right: 40px;
+  }
+  
+  .slidecontainer .slideer {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.4rem;
+    width: 30vh;
+    height: 11px;
+    border-radius: 3px;
+    margin-top: 4px;
+  
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #00BF63; 
+  }
+  
+  .slideer::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 16px;
+    border-radius: 50%;
+    background: #00BF63;
+    
+  }
+  
+  .table-responsive {
+    border-radius: 0.4rem;
+  }
+  
+  .table-responsive th {
+    border: 3px solid #ffffff;
+    padding: 4px;
+  }
+  
+  .table-responsive th {
+    border-bottom: 3px solid #ffffff; 
+  }
+  
+  .data-container {
+    display: flex;
+    width: 90%;
+    margin-top: 30px;
+  }
+  
+  .data-container label {
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    display: block;
+  }
+  
+  .data-container input {
+    font-size: 12px;
+    border-radius: 0.4rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+  
+  .Adicionar {
+    width: 78px;
+    height: 4vh;
+    font-size: 11px;
+    border-radius: 0.3rem; 
+    background: rgb(0, 67, 190);
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .resultado-container input {
+    width: 1220px;
+    height: 30px;
+    margin: 3px 0px;
+    border: 2px solid #295f96;
+    border-radius: 0.4rem;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    font-size: 12px;
+  }
+  
+  .resultado:focus {
+    border-color: #0b7dda;
+    box-shadow: 0 0 5px rgba(11, 125, 218, 0.5);
+  }
+  
+  .limparfiltro{
+   width:69px;
+   height: 32px;
+   border-radius: 0.4rem;
+   background: rgb(0, 67, 190);
+   color: #fff;
+   text-transform: uppercase;
+   font-weight: bold;
+  
+  }
+  
+  .filters-container {
+    display: flex;
+    align-items: center;
+    width: 80vh;
+    height: 6vh;
+    margin: 18px 400px;
+  }
+  
+  .filters-container .buttons-container {
+    display: flex;
+    gap: 5px;  
+  }
+  
+  .filters-container select,
+  .filters-container input {
+    margin-bottom: 0px; 
+    height: 4vh;
+    width: 194px;
+    border-radius: 0.4rem;
+    border: 2px solid #0b7dda;
+  }
+  
+  .filters-container label{
+    margin-bottom: 0x; 
+    border-radius: 0.4rem;
+  }
+  
+  .btn-group i{
+    font-size:18px; 
+  }
+                                         
+  .table-container {
+   background-color: #212529;
+   padding: 3vh;
+   max-height: 68vh;
+   border-radius: 0.4rem;
+   border-style: solid;
+   border-color: #343a40a8;
+   overflow-y: auto;
+   width: 100%;
+   max-width: 1299px;
+  }
+  
+  .table-responsive th{
+    border: none;
+    border-bottom: 3px solid #ffffff;
+    background-color: #ffffff00;
+  }
+  
+  .table-responsive td :hover {
+    overflow: visible;
+    white-space: normal;
+  }
+  
+  .table-container .table-responsive .table-hover tbody tr:hover  {
+    background-color: #f5f5f523;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .expandable {
+    max-width: 100px; 
+    position: relative;
+    overflow: hidden
+  }
+  
+  .expandable:hover {
+    max-width: none;
+    white-space: normal;
+    overflow: visible;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0);
+  
+  }
+  

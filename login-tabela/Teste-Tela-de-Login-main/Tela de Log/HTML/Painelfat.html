@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Faturmento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"><!--link da biblioteca de icons-->
+    <link rel="stylesheet" href='css/painelfat.css'><!--incluir o link do CSS futuramente-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"><!-- jQuery UI CSS -->
+    
+</head>
+<body>
+    <img src="{% static 'img/Logo.png' %}" alt="Logo>
+
+
+ 
+
+  
+    <header class="header-container">
+        <div class="table-responsive"> 
+        <div container="buttons-container">
+        <div class="searchbar">
+        <button class="button1">Faturar</button>
+        <button class="button2">ELIMINAR RESIDUOS</button>      
+        <input class="searchbar" placeholder="Palavra chave.." >
+        <button class="search-button"><i class="fas fa-search"></i>   
+         
+ </div> 
+</div>
+
+    <!--bottão faturamento-->
+           <div class="filters-container">
+              <div class="buttons-container">         
+               <select name="fields" id="fields">
+                <option value="pedido">PEDIDO</option>
+                <option value="cliente">CLIENTE</option>
+                <option value="loja">LOJA</option>
+                <option value="NOME CLIENTE">NOME CLIENTE</option>
+                <option value="TP PED">TP PED</option>
+                <option value="DESC_COND_PGTO">DESC_COND_PGTO</option>
+                <option value="DESC_VENDEDOR">DESCONTO VENDEDOR</option>
+                <option value="DT_EMISSÃO">DATA EMISSÃO</option>
+                <option value="UF">UF</option>
+                <option value="QT_PE">QUANTIDADE PEDIDO</option>
+                <option value="QT_FAT">QUANTIDADE FAT</option>
+                <option value="QT_DISP">QUANTIDADE DISPONIVEL</option>
+                <option value="QT_SALDOS">QUANTIDADE SALDOS</option>
+                <option value="QT_RESIDUO">QUATIDADE RESIDUO</option>
+                <option value="VLR_DISP">VALOR_DISP</option>
+                <option value="VLR_SALDO">VALO SALDO</option>
+                <option value="QT_RESIDUO">VALOR RESIDUO</option>
+                <option value="%FAT">%FAT</option>
+                <option value="%DISP">%DISP</option>
+               </select>
+
+            <label class="textfiltro5">Operador:</label>
+            <select name="operators" id="operators">
+                <option value="=">Igual a</option>
+                <option value="<>">Diferente de</option>
+                <option value="<">Menor que</option>
+                <option value="<=">Menor ou igual a</option>
+                <option value=">">Maior que</option>
+                <option value=">=">Maior ou igual a</option>
+                <option value="%">Contém</option>
+            </select>
+
+            <div class="btn-group">
+                <label for="expressionInput">Expressão:</label>
+                <input type="text" id="valueInput" placeholder="">
+                <button class="Adicionar" id="addButton" class="button1">Adicionar</button>
+                <input class="filtrodata fname" placeholder="17/07/2022">
+                <i class="fa fa-calendar icon calendar-icon-fname"></i>
+                <label for="lname">Até:</label>
+                <input class="filtrodata lname" placeholder="17/07/2022">
+                <i class="fa fa-calendar icon calendar-icon-lname"></i>
+                </div>
+              </div>
+            </div>
+            <!-- buttons-container -->            
+        
+    <div class="resultado-container">
+        <input class="resultado" type="text" id="expressionInput" placeholder="Resultado....">
+
+       
+        <button class="limparfiltro" id="clearButton">Limpar</button>
+    </div>
+
+    <div class="slidecontainer">
+        <label> FAT: %<span id="demo"></span></label>
+        <input type="range" min="0" max="100" value="0" class="slider" id="myRange">
+    
+        <label> DISP: %<span id="Demooo"></span></label>
+        <input type="range" min="0" max="100" value="0" class="slideer" id="myRangee">
+   
+    </div>
+    <!--bibliotecas JQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script><!-- jQuery -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><!-- jQuery UI -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/i18n/datepicker-pt-BR.min.js"></script><!-- jQuery UI Calendario em Português -->
+    <!--bibliotecas JQuery-->
+<script>
+    var slider = document.getElementById("myRange");
+                var output = document.getElementById("demo");
+                output.innerHTML = slider.value;
+        
+                slider.oninput = function() {
+                    output.innerHTML = this.value;
+                }
+        
+        
+                var slideer = document.getElementById("myRangee");
+                var output2 = document.getElementById("Demooo");
+                output2.innerHTML = slideer.value;
+        
+                slideer.oninput = function() {
+                    output2.innerHTML = this.value;
+                }
+ </script>
+
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover">
+                <thead class="table-table-dark" id="table-head">
+                    <tr>
+                        <th>PEDIDO</th>
+                        <th>CLJ</th>
+                        <th>LJ</th>
+                        <th>NOME CLIENTE</th>
+                        <th>TP PED</th>
+                        <th>DESC_COND_PGTO</th>
+                        <th>DESC_VENDEDOR</th>
+                        <th>DT_EMISSÃO</th>
+                        <th>UF</th>
+                        <th>QT_PE</th>
+                        <th>QT_FAT</th>
+                        <th>QT_DISP</th>
+                        <th>QT_SALDOS</th>
+                        <th>QT_RESIDUO</th>
+                        <th>VLR_DISP</th>
+                        <th>VLR_SALDO</th>
+                        <th>VLR_RESIDUO</th>
+                        <th>%FAT</th>
+                        <th>%DISP</th>
+
+                        
+                    
+
+                </tr>
+                </thead>
+                
+         
+                <tr>
+                    <td class="expandable">12345</td>
+                    <td class="expandable">123</td>
+                    <td>01</td>
+                    <td class="expandable">Cliente Exemplo</td>
+                    <td class="expandable">TP1</td>
+                    <td>Cond1</td>
+                    <td class ="expandable">Vendedor Exemplo</td>
+                    <td>17/07/2023</td>
+                    <td>SP</td>
+                    <td>100</td>
+                    <td>80</td>  
+                    <td>20</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>R$ 1000,00</td>
+                    <td>R$ 200,00</td>
+                    <td>R$ 0,00</td>
+                    <td>80%</td>
+                    <td>20%</td>
+                </tr>
+        
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP2</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor Exemplo</td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP3</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP4</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP5</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP6</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP7</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        
+                        <td class="expandable" data-fat="50">50%</td>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP8</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP9</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP8</td>
+                        <td>Cond2</td>
+                        <td call="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP8</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                    <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP8</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor </td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+
+                     <tr>
+                        <td>67890</td>
+                        <td>456</td>
+                        <td>02</td>
+                        <td class="expandable">Cliente Teste</td>
+                        <td>TP8</td>
+                        <td>Cond2</td>
+                        <td class="expandable">Vendedor Exemplo</td>
+                        <td>18/07/2023</td>
+                        <td>RJ</td>
+                        <td>200</td>
+                        <td>150</td>
+                        <td>50</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>R$ 2000,00</td>
+                        <td>R$ 500,00</td>
+                        <td>R$ 0,00</td>
+                        <td>75%</td>
+                        <td>25%</td>
+                    </tr>
+                    
+
+
+                    </thead>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="{% static 'js/tabela.js'%}"></script>
+
+</body>
+</html>
+          
